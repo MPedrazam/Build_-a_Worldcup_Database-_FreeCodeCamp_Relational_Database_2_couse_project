@@ -23,11 +23,13 @@ do
   
     # if no found
     if [[ -z $TEAM_ID_1 ]]
-    # insert team
+    # inserting winning team
     then
         INSERT_WIN=$($PSQL "INSERT INTO teams(name) VALUES ('$WINNER')")   
+    
     fi
 
+    # insertinf winning team
     if [[ -z $TEAM_ID_2 ]]
     then
       INSERT_OPP=$($PSQL "INSERT INTO teams(name) VALUES ('$OPPONENT')")
