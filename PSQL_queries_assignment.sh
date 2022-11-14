@@ -8,7 +8,7 @@ echo -e "\nTotal number of goals in all games from winning teams:"
 echo "$($PSQL "SELECT SUM(winner_goals) FROM games")"
 
 echo -e "\nTotal number of goals in all games from both teams combined:"
-echo "$($PSQL "SELECT (SUM(winner_goals)+ SUM(opponent_goals)) AS toral_goals FROM games")"
+echo "$($PSQL "SELECT (SUM(winner_goals)+ SUM(opponent_goals)) FROM games")"
 
 echo -e "\nAverage number of goals in all games from the winning teams:"
 echo "$($PSQL "SELECT AVG(winner_goals) FROM games")"
@@ -26,16 +26,16 @@ echo -e "\nNumber of games where the winning team scored more than two goals:"
 echo "$($PSQL "SELECT COUNT(winner_goals) FROM games WHERE winner_goals > 2")"
 
 echo -e "\nWinner of the 2018 tournament team name:"
-echo "$($PSQL "SELECT team FROM games FULL JOIN teams ON games.winner_id = teams.winner_id WHERE year = 2018, round = 'final'")"
+echo "$($PSQL "SELECT name FROM games FULL JOIN teams ON games.winner_id = teams.team_id WHERE year = 2018 AND round = 'Final'")"
 
 echo -e "\nList of teams who played in the 2014 'Eighth-Final' round:"
-echo "$($PSQL "SELECT name FROM games FULL JOIN teams ON games.winner_id = teams.team_id WHERE year = 2014 AND round = 'Eighth-Final'")"
+echo "$($PSQL "SELECT name FROM games INNER JOIN teams ON games.winner_id=teams.team_id OR games.opponent_id=teams.team_id WHERE (year=2014 AND round='Eighth-Final') ORDER BY name")"
 
 echo -e "\nList of unique winning team names in the whole data set:"
-echo "$($PSQL "ELECT DISTINCT(name) FROM teams FULL JOIN games ON teams.team_id=games.winner_id WHERE winner_id IS NOT NULL")"
+echo "$($PSQL "SELECT DISTINCT(name) FROM teams FULL JOIN games ON teams.team_id=games.winner_id WHERE winner_id IS NOT NULL ORDER BY name")"
 
 echo -e "\nYear and team name of all the champions:"
-echo "$($PSQL "SELECT name, year FROM games FULL JOIN teams ON games.winner_id = teams.team_id WHERE round = 'Final'")"
+echo "$($PSQL "SELECT year, name FROM games FULL JOIN teams ON games.winner_id = teams.team_id WHERE round = 'Final' ORDER BY year")"
 
 echo -e "\nList of teams that start with 'Co':"
 echo "$($PSQL "SELECT name FROM teams WHERE name LIKE 'Co%'")"
