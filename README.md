@@ -1,7 +1,6 @@
 # Building a World Cup Database: FreeCodeCamp Relational Database course_project
 
-This is the second required project in the FreeCodeCamp Relational Database certification
-https://www.freecodecamp.org/learn/relational-database/build-a-world-cup-database-project/build-a-world-cup-database
+This is the second required project in the FreeCodeCamp Relational Database certification. Project informtion can be found [HERE](https://www.freecodecamp.org/learn/relational-database/build-a-world-cup-database-project/build-a-world-cup-database).
 
 The project aim to buld a relational databse from a wouldcup .csv file by using Bash ans postgrePSQL.
 
